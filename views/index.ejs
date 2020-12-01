@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <title>Redis Tasks</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">
+    <style>
+        .del:checked + span {
+            color: red;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Redis Tasks</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--    <div class="collapse navbar-collapse" id="navbarsExampleDefault">-->
+    <!--        <ul class="navbar-nav mr-auto">-->
+    <!--        </ul>-->
+    <!--        <form class="form-inline my-2 my-lg-0">-->
+    <!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+    <!--            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
+    <!--        </form>-->
+    <!--    </div>-->
+</nav>
+
+<main role="main" class="container">
+
+    <div class="jumbotron">
+        <h4> Add Task </h4>
+        <form method="POST" action="/task/add">
+            <label>
+                <input type="text" name="task" placeholder="Task description">
+            </label>
+            <input type="submit" value="Send">
+        </form><br>
+        <h4><%= title %> </h4>
+        <form method="POST" action="/task/delete">
+            <ul class="task-list">
+                <% tasks.forEach(function(task){ %>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="tasks" class="del" value="<%= task %>">
+                            <span><%= task %></span>
+                        </label>
+                    </li>
+                <% }) %>
+            </ul>
+            <input type="submit" value="Delete Checked">
+        </form>
+    </div>
+
+    <div class="jumbotron">
+        <h4>Next Business Call</h4>
+        Name: <%= call.name %> <br>
+        Company: <%= call.company %> <br>
+        Phone: <%= call.phone %> <br>
+        Time: <%= call.time %> <br>
+        <br><br>
+        <h4>Edit Next Call</h4>
+        <form method="POST" action="/call/add">
+            <label>Contact Name<br>
+                <input type="text" name="name" placeholder="Contact name">
+            </label><br>
+
+            <label>Company<br>
+                <input type="text" name="company" placeholder="Company">
+            </label><br>
+
+            <label>Phone<br>
+                <input type="text" name="phone" placeholder="Phone">
+            </label><br>
+
+            <label>Day & Time<br>
+                <input type="text" name="time" placeholder="Phone">
+            </label><br>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+</main>
+</body>
+</html>
+
+
+
